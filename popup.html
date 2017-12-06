@@ -34,23 +34,15 @@
   </head>
 
   <body>
-    <h1>Background Color Changer</h1>
+    <h1>Options</h1>
     <div id="container">
-      <span>Choose a color</span>
-      <select id="dropdown">
-        <option selected disabled hidden value=''></option>
-        <option value="white">White</option>
-        <option value="pink">Pink</option>
-        <option value="green">Green</option>
-        <option value="yellow">Yellow</option>
-      </select>
+      <span>background color</span>
+    <input type="color" id="dropdown">
       <br><br>
-      <span> Choose a font size </span>
-      <select id="fontSize">
-        <option value="16">16</option>
-        <option value="18">18</option>
-        <option value="20">20</option>
-      </select>
+      <span>font color</span>
+      <input type="color" id="fontColor">
+      <span> font size </span>
+    <input type="range" min="8" max="72" id="fontSize">
     </div>
   </body>
 </html>

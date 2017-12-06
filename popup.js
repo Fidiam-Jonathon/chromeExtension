@@ -105,8 +105,9 @@ function saveBackgroundColor(url, color) {
 // user devices.
 document.addEventListener('DOMContentLoaded', () => {
   getCurrentTabUrl((url) => {
-    var dropdown = document.getElementById('dropdown');
+    var dropdown   = document.getElementById('dropdown');
     var fontChange = document.getElementById("fontSize");
+    var fontColor  = document.getElementById("fontColor");
 
     // Load the saved background color for this page and modify the dropdown
     // value, if needed.
@@ -128,6 +129,12 @@ document.addEventListener('DOMContentLoaded', () => {
       changeFontSize(fontSize.value);
      // saveFontSize(url, fontSize.value);
     });
+
+    fontColor.addEventListener('change', ()=>{
+      changeFontColor(fontColor.value);
+      //saveFontColor(url, fontColor.value);
+    });
+
   });
 });
 
@@ -137,5 +144,12 @@ function changeFontSize(size){
         file: 'contentScript.js'
   });
   });
+}
 
+function changeFontColor(color){
+  var script = 'document.body.style.color="' + color + '";';
+
+  chrome.tabs.executeScript({
+    code: script
+  });
 }
