@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
       saveBackgroundColor(url, dropdown.value);
     });
 
-    fontSize.addEventListener('change', ()=>{
+    fontSize.addEventListener('input', ()=>{
       changeFontSize(fontSize.value);
      // saveFontSize(url, fontSize.value);
     });
