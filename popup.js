@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
       saveBackgroundColor(url, dropdown.value);
     });
 
-    fontSize.addEventListener('input', ()=>{
+    fontChange.addEventListener('input', ()=>{
       changeFontSize(fontSize.value);
      // saveFontSize(url, fontSize.value);
     });
@@ -147,9 +147,10 @@ function changeFontSize(size){
 }
 
 function changeFontColor(color){
-  var script = 'document.body.style.color="' + color + '";';
-
-  chrome.tabs.executeScript({
-    code: script
+  chrome.storage.local.set({"fontColor": color}, ()=>{
+        chrome.tabs.executeScript({
+        file: 'contentScript1.js'
+  });
   });
 }
+
