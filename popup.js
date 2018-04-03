@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ensure the background color is changed and saved when the dropdown
     // selection changes.
-    dropdown.addEventListener('change', () => {
+    dropdown.addEventListener('input', () => {
       changeBackgroundColor(dropdown.value);
       saveBackgroundColor(url, dropdown.value);
     });
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
      // saveFontSize(url, fontSize.value);
     });
 
-    fontColor.addEventListener('change', ()=>{
+    fontColor.addEventListener('input', ()=>{
       changeFontColor(fontColor.value);
       //saveFontColor(url, fontColor.value);
     });
@@ -150,6 +150,14 @@ function changeFontColor(color){
   chrome.storage.local.set({"fontColor": color}, ()=>{
         chrome.tabs.executeScript({
         file: 'contentScript1.js'
+  });
+  });
+}
+
+function changeBackgroundColor(bgcolor){
+  chrome.storage.local.set({"bgColor": bgcolor}, ()=>{
+        chrome.tabs.executeScript({
+        file: 'contentScript2.js'
   });
   });
 }

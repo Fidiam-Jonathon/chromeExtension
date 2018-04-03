@@ -37,12 +37,19 @@
     <h1>Options</h1>
     <div id="container">
       <span>background color</span>
-    <input type="color" id="dropdown">
+    <select id="dropdown">
+      <option value="red">red</option>
+      <option value="blue" select>blue</option>
+    </select>
       <br><br>
       <span>font color</span>
-      <input type="color" id="fontColor">
+      <select id="fontColor">
+        <option value="black" selected>black</option>
+        <option value="white">white</option>
+      </select>
       <span> font size </span>
     <input type="range" min="8" max="72" id="fontSize">
+    <input type="checkbox" id="apply"> Apply
     </div>
   </body>
 </html>
