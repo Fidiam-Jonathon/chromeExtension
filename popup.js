@@ -1,13 +1,4 @@
-// Copyright (c) 2014 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
 
-/**
- * Get the current URL.
- *
- * @param {function(string)} callback called when the URL of the current tab
- *   is found.
- */
 function getCurrentTabUrl(callback) {
   // Query filter to be passed to chrome.tabs.query - see
   // https://developer.chrome.com/extensions/tabs#method-query
@@ -35,6 +26,21 @@ function getCurrentTabUrl(callback) {
     console.assert(typeof url == 'string', 'tab.url should be a string');
 
     callback(url);
+
+    if (localStorage.getItem("fontSize") != undefined){
+      let fontSize = localStorage.getItem("fontSize");
+      changeFontSize(fontSize);
+    }
+
+     if (localStorage.getItem("fontColor") != undefined){
+      let fontColor = localStorage.getItem("fontColor");
+      changeFontSize(fontColor);
+    }
+     if (localStorage.getItem("bgColor") != undefined){
+      let fontSize = localStorage.getItem("bgColor");
+      changeFontSize(fontSize);
+    }
+
   });
 
   // Most methods of the Chrome extension APIs are asynchronous. This means that
@@ -47,30 +53,6 @@ function getCurrentTabUrl(callback) {
   // alert(url); // Shows "undefined", because chrome.tabs.query is async.
 }
 
-/**
- * Change the background color of the current page.
- *
- * @param {string} color The new background color.
- */
-function changeBackgroundColor(color) {
-  var script = 'document.body.style.backgroundColor="' + color + '";';
-  // See https://developer.chrome.com/extensions/tabs#method-executeScript.
-  // chrome.tabs.executeScript allows us to programmatically inject JavaScript
-  // into a page. Since we omit the optional first argument "tabId", the script
-  // is inserted into the active tab of the current window, which serves as the
-  // default.
-  chrome.tabs.executeScript({
-    code: script
-  });
-}
-
-/**
- * Gets the saved background color for url.
- *
- * @param {string} url URL whose background color is to be retrieved.
- * @param {function(string)} callback called with the saved background color for
- *     the given url on success, or a falsy value if no color is retrieved.
- */
 function getSavedBackgroundColor(url, callback) {
   // See https://developer.chrome.com/apps/storage#type-StorageArea. We check
   // for chrome.runtime.lastError to ensure correctness even when the API call
@@ -80,12 +62,6 @@ function getSavedBackgroundColor(url, callback) {
   });
 }
 
-/**
- * Sets the given background color for url.
- *
- * @param {string} url URL for which background color is to be saved.
- * @param {string} color The background color to be saved.
- */
 function saveBackgroundColor(url, color) {
   var items = {};
   items[url] = color;
@@ -122,23 +98,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // selection changes.
     dropdown.addEventListener('input', () => {
       changeBackgroundColor(dropdown.value);
-      saveBackgroundColor(url, dropdown.value);
     });
 
     fontChange.addEventListener('input', ()=>{
-      changeFontSize(fontSize.value);
-     // saveFontSize(url, fontSize.value);
+      changeFontSize(fontChange.value);
     });
 
     fontColor.addEventListener('input', ()=>{
       changeFontColor(fontColor.value);
-      //saveFontColor(url, fontColor.value);
+      
     });
 
   });
 });
 
 function changeFontSize(size){
+  localStorage.setItem("fontSize", size);
   chrome.storage.local.set({"fontSize": size}, ()=>{
         chrome.tabs.executeScript({
         file: 'contentScript.js'
@@ -147,6 +122,7 @@ function changeFontSize(size){
 }
 
 function changeFontColor(color){
+   localStorage.setItem("fontColor", color);
   chrome.storage.local.set({"fontColor": color}, ()=>{
         chrome.tabs.executeScript({
         file: 'contentScript1.js'
@@ -155,10 +131,15 @@ function changeFontColor(color){
 }
 
 function changeBackgroundColor(bgcolor){
+   localStorage.setItem("bgcolor", bgcolor);
   chrome.storage.local.set({"bgColor": bgcolor}, ()=>{
         chrome.tabs.executeScript({
         file: 'contentScript2.js'
   });
   });
 }
+
+
+
+
 

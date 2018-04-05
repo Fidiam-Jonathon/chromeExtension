@@ -5,17 +5,31 @@
   "description": "Modify the background color, font color and font size of a page.",
   "version": "1.0",
 
-  "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "popup.html"
-  },
-  "permissions": [
+    "permissions": [
     "activeTab",
-    "storage"
+    "storage",
+    "tabs"
   ],
+
+  "browser_action": {
+    //"default_icon": "icon.png",
+    //"default_popup": "popup.html"
+    "default_title": "change font size, color and background color"
+  },
+ "options_ui": {
+    // Required.
+    "page": "options.html",
+    // Recommended.
+    "chrome_style": true
+  },
+  "background":{
+    "scripts": ["background.js"],
+     "persistant": true
+   },
+
   "content_scripts": [{
     "matches": ["http://*/", "https://*/"],
-    "js": ["contentScript.js", "contentScript1.js", "contentScript2.js"]
+    "js": ["contentScript.js", "contentScript1.js", "contentScript2.js", "jquery.js"]
   }
   ]
 }
