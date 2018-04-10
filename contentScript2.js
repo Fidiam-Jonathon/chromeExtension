@@ -10,6 +10,8 @@
     var link =  document.getElementsByTagName('a');
 
     console.log("font color from LS: ", bgColor);
+
+    document.body.style.backgroundColor = bgColor.bgColor;
     
     for (let i = 0; i < p.length; i++){
       p[i].style.backgroundColor = bgColor.bgColor;

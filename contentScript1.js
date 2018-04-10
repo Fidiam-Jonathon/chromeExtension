@@ -10,6 +10,8 @@
     var link =  document.getElementsByTagName('a');
 
     console.log("font color from LS: ", newColor);
+
+    document.body.style.color = newColor.fontColor;
     
     for (let i = 0; i < p.length; i++){
       p[i].style.color = newColor.fontColor;
@@ -18,16 +20,16 @@
       div[i].style.color = newColor.fontColor;
     }
      for (let i = 0; i < h1.length; i++){
-      h1[i].style.color = newColor;
+      h1[i].style.color = newColor.fontColor;
     }
      for (let i = 0; i < h2.length; i++){
-      h2[i].style.color = newColor;
+      h2[i].style.color = newColor.fontColor;
     }
      for (let i = 0; i < h3.length; i++){
-      h3[i].style.color = newColor;
+      h3[i].style.color = newColor.fontColor;
     }
      for (let i = 0; i < link.length; i++){
-      link[i].style.color = newColor;
+      link[i].style.color = newColor.fontColor;
     }
 }
 );
