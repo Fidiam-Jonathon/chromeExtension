@@ -10,7 +10,7 @@
     "storage",
     "tabs",
     "notifications",
-    "<URL>"
+    "<all_urls>"
   ],
 
   "browser_action": {
@@ -22,11 +22,11 @@
     // Required.
     "page": "options.html",
     // Recommended.
-    "chrome_style": true
+    "chrome_style": false
   },
   "background":{
-    "scripts": ["background.js"],
-    "persistant": true
+    "scripts": ["background.js"]
+   // "persistant": true
    },
 
   "content_scripts": [{

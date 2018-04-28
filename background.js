@@ -4,7 +4,7 @@ chrome.tabs.onActivated.addListener(function(tab){
 
 
 	console.log("*******************");
-	console.log("onActivated event fired", tab);
+	console.log("onActivated event fired");
 
 	console.log("********************");
 
@@ -13,12 +13,12 @@ chrome.tabs.onActivated.addListener(function(tab){
     file: "contentScript.js"
   });
 
-   console.log('Changing fontColor of ' + tab.url);
+   
   chrome.tabs.executeScript({
     file: "contentScript1.js"
   });
 
-   console.log('Changing bgColor of ' + tab.url);
+   console.log('Changing bgColor');
   chrome.tabs.executeScript({
     file: "contentScript2.js"
   });
@@ -54,7 +54,9 @@ chrome.tabs.onUpdated.addListener(function(tab){
 // Called when the user clicks on the browser action.
 chrome.browserAction.onClicked.addListener(function(tab) {
 
+	chrome.runtime.openOptionsPage();
 
+/*
 		  // No tabs or host permissions needed!
   console.log('Changing fontSize of ' + tab.url);
   chrome.tabs.executeScript({
@@ -70,6 +72,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
   chrome.tabs.executeScript({
     file: "contentScript2.js"
   });
+  */
 });
 
 
